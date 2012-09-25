@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/template/common/commonLayout.xhtml">
+        <ui:define name="conteudo">
+        <h1>Definir Equipe Projeto</h1>
+        <hr/>
+        <h3>Dados do Projeto</h3>
+
+        <h:form id="equipeProjeto" prependId="false">
+
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Código:"/>
+                <h:outputText value="#{profissionalProjetoBean.projeto.codigo}"/>
+                <h:outputLabel value="Nome:"/>
+                <h:outputText value="#{profissionalProjetoBean.projeto.nome}"/>      
+                
+            </h:panelGrid>
+            <h3>Equipe</h3>
+            <h:dataTable var="profissionalProjeto" value="#{profissionalProjetoBean.listarProfissionalProjeto()}">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Profissional"/>
+                    </f:facet>
+                    <h:outputText value="#{profissionalProjeto.profissional.nome}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Data de Entrada"/>
+                    </f:facet>
+                    <h:outputText value="#{profissionalProjeto.dataEntrada}">
+                        <f:convertDateTime dateStyle="long" type="date"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Data de Desligamento"/>
+                    </f:facet>
+                    <h:outputText value="#{profissionalProjeto.dataDesligamento}">
+                        <f:convertDateTime dateStyle="long" type="date"/>
+                    </h:outputText>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Alterar"/>
+                    </f:facet>
+                    
+                    <h:commandButton action="#{profissionalProjetoBean.desligar(profissionalProjeto)}" value="Desligar"/>
+                    
+                </h:column>
+
+            </h:dataTable>
+
+            <h:commandButton action="#{profissionalProjetoBean.addProfissional}" value="Adicionar Profissional"  >
+                <f:setPropertyActionListener 
+			target="#{profissionalProjetoBean.projeto}" 
+			value="#{profissionalProjetoBean.projeto}" />
+            </h:commandButton><br/>
+
+            <h:link outcome="index" value="Início"/>
+        </h:form>
+        
+    </ui:define>
+    </ui:composition>
+</html>

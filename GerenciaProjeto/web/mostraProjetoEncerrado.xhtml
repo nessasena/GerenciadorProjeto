@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/template/common/commonLayout.xhtml">
+        <ui:define name="conteudo">
+        <h1>Projeto Encerrado</h1>
+        <hr/>
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Código:"/>
+            <h:outputText value="#{projetoBean.projeto.codigo}"/>
+            <h:outputLabel value="Nome:"/>
+            <h:outputText value="#{projetoBean.projeto.nome}"/>
+            <h:outputLabel value="Data de Abertura:"/>
+            <h:outputText value="#{projetoBean.projeto.dataAbertura}">
+                    <f:convertDateTime dateStyle="long" type="date"/>
+                </h:outputText>
+             <h:outputLabel value="Data de Término:"/>
+             <h:outputText value="#{projetoBean.projeto.dataTermino}">
+                    <f:convertDateTime dateStyle="long" type="date"/>
+                </h:outputText>
+             <h:outputLabel value="Data de Fechamento:"/>
+             <h:outputText value="#{projetoBean.projeto.dataFechamento}">
+                    <f:convertDateTime dateStyle="long" type="date"/>
+                </h:outputText>
+            <h:outputLabel value="Gerente:"/>
+            <h:outputText value="#{projetoBean.projeto.gerente.nome}"/>   
+            <h:outputLabel value="Dias em atraso:"/>
+            <h:outputText value="#{projetoBean.diasAtraso}"/>          
+            <h:outputLabel value="Tarefas concluídas:"/>
+            <p:progressBar value="#{projetoBean.percentualTarefasConcluidas}" labelTemplate="{value}%" displayOnly="true"/>          
+        </h:panelGrid>        
+        <h:link outcome="index" value="Início"/>
+     </ui:define>
+    </ui:composition>
+</html>

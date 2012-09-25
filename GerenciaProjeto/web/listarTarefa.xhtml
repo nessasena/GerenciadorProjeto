@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/template/common/commonLayout.xhtml">
+        <ui:define name="conteudo">
+        <h1>Alocação de Tarefas</h1>
+        <hr/>
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Projeto:"/>
+            <h:outputText value="#{tarefaProjetoBean.profissionalProjeto.projeto.nome}"/>
+            <h:outputLabel value="Profissional:"/>
+            <h:outputText value="#{tarefaProjetoBean.profissionalProjeto.profissional.nome}"/>
+            <h:outputLabel value="Descrição tarefa:"/>
+            <h:outputText value="#{tarefaProjetoBean.descricao}"/>
+                
+             <h:outputLabel value="Data de Início"/>
+             <h:outputText value="#{tarefaProjetoBean.dataInicio}">
+                    <f:convertDateTime dateStyle="long" type="date"/>
+                </h:outputText>
+             <h:outputLabel value="Data Prevista para Término"/>
+             <h:outputText value="#{tarefaProjetoBean.dataPrevistaTermino}">
+                    <f:convertDateTime dateStyle="long" type="date"/>
+                </h:outputText>
+             
+                   
+        </h:panelGrid>
+        <h:link outcome="index" value="Início"/>
+    </ui:define>
+    </ui:composition>
+</html>
+

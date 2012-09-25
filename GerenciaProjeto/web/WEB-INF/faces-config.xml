@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.1"
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>iniciar</from-outcome>
+            <to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>login.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>login_sucesso</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>        
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>login.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>login_falha</from-outcome>
+            <to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>        
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>usuario.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>sucesso</from-outcome>
+            <to-view-id>/mostraUsuario.xhtml</to-view-id>
+        </navigation-case>        
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>profissional.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{profissionalBean.salvar}</from-action>
+            <from-outcome>sucesso</from-outcome>
+            <to-view-id>/mostraProfissional.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>projeto.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{projetoBean.salvar}</from-action>
+            <from-outcome>sucesso</from-outcome>
+            <to-view-id>/mostraProjeto.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>encerraProjeto.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{projetoBean.encerrarProjeto}</from-action>
+            <from-outcome>sucesso</from-outcome>
+            <to-view-id>/mostraProjetoEncerrado.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>defineProjeto.xhtml</from-view-id>
+        <navigation-case> 
+            <from-action>#{projetoBean.defineProjeto}</from-action>
+            <from-outcome>ok</from-outcome>
+            <to-view-id>/defineEquipe.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    
+    <navigation-rule>
+        <from-view-id>selecionaProjeto.xhtml</from-view-id>
+        <navigation-case> 
+            <from-action>#{projetoBean.defineProjeto}</from-action>
+            <from-outcome>ok</from-outcome>
+            <to-view-id>alocarTarefa.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>alocarTarefa.xhtml</from-view-id>
+        <navigation-case> 
+            <from-action>#{tarefaProjetoBean.salvar}</from-action>
+            <from-outcome>sucesso</from-outcome>
+            <to-view-id>listarTarefa.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case> 
+            <from-action>#{tarefaProjetoBean.confirmaSalvar}</from-action>
+            <from-outcome>sucesso</from-outcome>
+            <to-view-id>listarTarefa.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>concluiTarefa.xhtml</from-view-id>
+        <navigation-case> 
+            <from-action>#{conclusaoTarefaBean.concluir(tarefa)}</from-action>
+            <from-outcome>ok</from-outcome>
+            <to-view-id>concluiTarefa.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>defineEquipe.xhtml</from-view-id>
+        <navigation-case> 
+            <from-action>#{profissionalProjetoBean.addProfissional}</from-action>
+            <from-outcome>sucesso</from-outcome>
+            <to-view-id>/defineProfissional.xhtml</to-view-id>
+        </navigation-case>
+        
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>defineEquipe.xhtml</from-view-id>
+        
+        <navigation-case> 
+            <from-action>#{profissionalProjetoBean.desligar(profissionalProjeto)}</from-action>
+            <from-outcome>tela_desligamento</from-outcome>
+            <to-view-id>/defineProfissional.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    
+        
+    
+    
+    <navigation-rule>
+        <from-view-id>defineProfissional.xhtml</from-view-id>
+        <navigation-case> 
+            <from-action>#{profissionalProjetoBean.salvar}</from-action>
+            <from-outcome>sucesso</from-outcome>
+            <to-view-id>/defineEquipe.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case> 
+            <from-action>#{profissionalProjetoBean.alterar}</from-action>
+            <from-outcome>sucesso</from-outcome>
+            <to-view-id>/defineEquipe.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <converter>        
+        <converter-id>ProfissionalConverter</converter-id>
+        <converter-class>
+            converter.ProfissionalConverter
+        </converter-class>
+    </converter>
+    <converter>        
+        <converter-id>ProjetoConverter</converter-id>
+        <converter-class>
+            converter.ProjetoConverter
+        </converter-class>
+    </converter>
+    <converter>        
+        <converter-id>ProfissionalProjetoConverter</converter-id>
+        <converter-class>
+            converter.ProfissionalProjetoConverter
+        </converter-class>
+    </converter>
+</faces-config>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/template/common/commonLayout.xhtml">
+        <ui:define name="conteudo">
+        <h1>Cadastro de Projetos</h1>
+        <hr/>
+        <h:form id="projeto" prependId="false">
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Código:"/>
+                <p:inputText id="codigo" value="#{projetoBean.codigo}" required="true" requiredMessage="Informe o código"/>
+                <h:outputLabel value="Nome:"/>
+                <p:inputText id="nome" value="#{projetoBean.nome}" required="true" requiredMessage="Informe o nome"/>
+                <h:outputLabel value="Data de Abertura:"/>
+                <p:inputText id="dataabertura" value="#{projetoBean.dataAbertura}" required="true" requiredMessage="Informe a data de abertura">
+                    <f:convertDateTime type="date"/>
+                </p:inputText>
+                <h:outputLabel value="Data de Término:"/>
+                <p:inputText id="datatermino" value="#{projetoBean.dataTermino}" required="true" requiredMessage="Informe a data prevista para término">
+                    <f:convertDateTime type="date"/>  
+                </p:inputText>
+                <h:outputLabel value="Gerente:"/>
+                <p:selectOneMenu id="gerente" value="#{projetoBean.gerente}" >
+                    <f:converter converterId="ProfissionalConverter"/>
+                    <f:selectItems value="#{profissionalBean.listarGerentes()}"  var="p" itemLabel="#{p.nome}"> 
+                        
+                    </f:selectItems>
+                </p:selectOneMenu>
+                <h:outputText/><h:commandButton action="#{projetoBean.salvar}" value="Salvar"/>
+            </h:panelGrid>
+            <h:link outcome="index" value="Início"/>
+        </h:form>
+    </ui:define>
+    </ui:composition>
+</html>
+

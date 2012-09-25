@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/template/common/commonLayout.xhtml">
+        <ui:define name="conteudo">
+        <h1>Cadastro de Usuario</h1>
+        <hr/>
+        <h:form id="usuario" prependId="false">
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Nome:"/>
+                <h:inputText id="nome" value="#{usuarioBean.nome}" required="true" requiredMessage="O nome não foi informado"/>
+                <h:outputLabel value="E-mail:"/>
+                <h:inputText id="email" value="#{usuarioBean.email}"/>
+                <h:outputLabel value="Senha:"/>
+                <h:inputSecret id="senha" value="#{usuarioBean.senha}" label="Senha"/>
+                <h:outputLabel value="Confirmar senha:"/>
+                <h:inputSecret id="confirmarsenha" value="#{usuarioBean.confirmarsenha}" label="Confirmar Senha"/>
+                <h:outputText/><h:commandButton action="#{usuarioBean.salvar}" value="Salvar"/>
+            </h:panelGrid>
+            <h:link outcome="iniciar" value="Início"/>
+        </h:form>
+    </ui:define>
+    </ui:composition>
+</html>

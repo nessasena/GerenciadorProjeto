@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/template/common/commonLayout.xhtml">
+        <ui:define name="conteudo">
+        <h1>Cadastro Profissional no Projeto</h1>
+        <hr/>
+        <h:form id="equipe" prependId="false">
+
+            <h3>Dados do Projeto</h3>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Código:"/>
+                <h:outputText value="#{profissionalProjetoBean.projeto.codigo}"/>
+                <h:outputLabel value="Nome:"/>
+                <h:outputText value="#{profissionalProjetoBean.projeto.nome}"/>                   
+            </h:panelGrid>
+
+            <h3>Profissional</h3>
+            <h:panelGrid columns="2">
+
+                <h:outputLabel value="Profissional:"/>
+                <p:selectOneMenu id="profissional" value="#{profissionalProjetoBean.profissional}" disabled="#{profissionalProjetoBean.desligamento}">
+                    <f:converter converterId="ProfissionalConverter"/>
+                    <f:selectItems value="#{profissionalBean.listarProfissionais()}"  var="p" itemLabel="#{p.nome}" > 
+
+                    </f:selectItems>
+                </p:selectOneMenu>                
+
+                <h:outputLabel value="Data de Entrada:"/>
+                <p:inputText id="dataabertura" readonly="#{profissionalProjetoBean.desligamento}" value="#{profissionalProjetoBean.dataEntrada}" required="true" requiredMessage="Informe a data de abertura">
+                    <f:convertDateTime type="date"/>
+                </p:inputText>
+                <h:outputLabel rendered="#{profissionalProjetoBean.desligamento}" value="Data de Desligamento"/>
+                <p:inputText rendered="#{profissionalProjetoBean.desligamento}" id="datatermino" value="#{profissionalProjetoBean.dataDesligamento}" required="false" >
+                    <f:convertDateTime type="date"/>  
+                </p:inputText>
+
+                <h:outputText/><h:commandButton rendered="#{profissionalProjetoBean.desligamento}" action="#{profissionalProjetoBean.alterar}" value="Alterar"/>
+                <h:commandButton rendered="#{!profissionalProjetoBean.desligamento}" action="#{profissionalProjetoBean.salvar}" value="Salvar"/>
+            </h:panelGrid>
+            <br/>
+            <h:link outcome="index" value="Início"/>
+        </h:form>
+   </ui:define>
+    </ui:composition>
+</html>
+

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/template/common/commonLayout.xhtml">
+        <ui:define name="conteudo">
+            <h1>Cadastro Tarefa no Projeto</h1>
+            <hr/>
+            <h:form id="equipe" prependId="false">
+
+                <h3>Dados do Projeto</h3>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Código:"/>
+                    <h:outputText value="#{profissionalProjetoBean.projeto.codigo}"/>
+                    <h:outputLabel value="Nome:"/>
+                    <h:outputText value="#{profissionalProjetoBean.projeto.nome}"/>                   
+                </h:panelGrid>
+
+                <h3>Tarefa</h3>
+                <h:panelGrid columns="2">
+                    <f:facet name="header">  
+                        <p:messages />  
+                    </f:facet>  
+                    <h:outputLabel value="Responsável:"/>
+                    <p:selectOneMenu id="profissional" value="#{tarefaProjetoBean.profissionalProjeto}">
+                        <f:converter converterId="ProfissionalProjetoConverter"/>
+                        <f:selectItems value="#{profissionalProjetoBean.listarProfissionalProjeto()}"  var="p" itemLabel="#{p.profissional.nome}" > 
+
+                        </f:selectItems>
+                    </p:selectOneMenu>                
+
+                    <h:outputLabel value="Descrição da tarefa:"/>
+                    <p:inputText id="descricao" value="#{tarefaProjetoBean.descricao}" required="true" requiredMessage="Informe a descrição">
+
+                    </p:inputText>
+
+                    <h:outputLabel value="Data de Início:"/>
+                    <p:inputText id="dataInicio" value="#{tarefaProjetoBean.dataInicio}" required="false" >
+                        <f:convertDateTime type="date"/>  
+                    </p:inputText>
+
+                    <h:outputLabel value="Data Prevista:"/>
+                    <p:inputText id="dataPrevistaTermino" value="#{tarefaProjetoBean.dataPrevistaTermino}" required="false" >
+                        <f:convertDateTime type="date"/>  
+                    </p:inputText>
+
+                    <h:outputLabel value="Data de Fim:"/>
+                    <p:inputText id="dataTermino" value="#{tarefaProjetoBean.dataTermino}" required="false" >
+                        <f:convertDateTime type="date"/>  
+                    </p:inputText>
+
+                    <h:outputText/><h:commandButton action="#{tarefaProjetoBean.salvar}" value="Salvar"/>
+                </h:panelGrid>
+                <br/>
+                <h:link outcome="iniciar" value="Início"/>
+            </h:form>            
+        </ui:define>
+    </ui:composition>
+</html>

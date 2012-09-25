@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/template/common/commonLayout.xhtml">
+        <ui:define name="conteudo">
+        <h1>Encerrar Projetos</h1>
+        <hr/>
+        <h:form id="encerrarProjeto" prependId="false">
+            <h:panelGrid columns="2">
+                
+                <h:outputLabel value="Projeto:"/>
+                <p:selectOneMenu id="projeto" value="#{projetoBean.projeto}" >
+                    <f:converter converterId="ProjetoConverter"/>
+                    <f:selectItems value="#{projetoBean.listarProjetos()}"  var="p" itemLabel="#{p.nome}">   
+                        
+                    </f:selectItems>
+                </p:selectOneMenu>
+                
+                <h:outputLabel value="Data de Fechamento:"/>
+                <p:inputText id="datatermino" value="#{projetoBean.projeto.dataFechamento}" required="true" requiredMessage="Informe a data prevista para término">
+                    <f:convertDateTime type="date"/>  
+                </p:inputText>
+                
+                <h:outputText/><h:commandButton action="#{projetoBean.encerrarProjeto}" value="Encerrar"/>
+            </h:panelGrid>
+            <h:link outcome="iniciar" value="Início"/>
+        </h:form>
+    </ui:define>
+    </ui:composition>
+</html>

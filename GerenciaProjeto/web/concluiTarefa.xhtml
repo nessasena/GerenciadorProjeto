@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/template/common/commonLayout.xhtml">
+        <ui:define name="conteudo">
+        <h1>Marcar Conclusão de Tarefa</h1>
+        <hr/>
+        <p:messages/>
+        <h:form id="formTarefa" prependId="false">
+            
+            <h:panelGrid id="gridprojeto" columns="2">     
+                <h:outputLabel value="Nome do projeto:"/>
+                <p:selectOneMenu id="projeto" value="#{conclusaoTarefaBean.projeto}" >
+                    <f:converter converterId="ProjetoConverter"/>
+                    <f:selectItems value="#{conclusaoTarefaBean.listarProjetos()}"  var="p" itemLabel="#{p.nome}">   
+                        
+                    </f:selectItems>
+                </p:selectOneMenu>
+                
+                <h:outputText/><p:commandButton value="Ok"  process="@all" update="tabelaTarefa"/>
+            </h:panelGrid>
+            <br/>
+            <h:dataTable id="tabelaTarefa" var="tarefa" value="#{conclusaoTarefaBean.listarTarefas()}" >
+                <h:column >
+                    <f:facet name="header">
+                        <h:outputText value="Responsável"/>
+                    </f:facet>
+                    <h:outputText value="#{tarefa.profissionalProjeto.profissional.nome}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Descrição Tarefa"/>
+                    </f:facet>
+                    <h:outputText value="#{tarefa.descricao}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Data de Início"/>
+                    </f:facet>
+                    <h:outputText value="#{tarefa.dataInicio}">
+                        <f:convertDateTime dateStyle="long" type="date"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Data Prevista Término"/>
+                    </f:facet>
+                    <h:outputText value="#{tarefa.dataPrevistaTermino}" >
+                        <f:convertDateTime dateStyle="long" type="date"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Data Término"/>
+                    </f:facet>
+                    <h:outputText value="#{tarefa.dataTermino}" >
+                        <f:convertDateTime dateStyle="long" type="date"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Concluir"/>
+                    </f:facet>
+                    
+                    <h:commandButton value="Concluir" action="#{conclusaoTarefaBean.concluir(tarefa)}"/>
+                    
+                </h:column>
+            </h:dataTable>
+            <br/>
+            <h:link outcome="index" value="Início"/>
+        </h:form>
+    </ui:define>
+    </ui:composition>
+</html>

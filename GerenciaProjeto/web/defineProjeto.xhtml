@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/template/common/commonLayout.xhtml">
+        <ui:define name="conteudo">
+        <h1>Definir Equipe Projeto</h1>
+        <hr/>
+        <h:form id="equipe" prependId="false">
+            <h:panelGrid columns="2">     
+                <h:outputLabel value="Nome do projeto:"/>
+                <p:selectOneMenu id="projeto" value="#{profissionalProjetoBean.projeto}" >
+                    <f:converter converterId="ProjetoConverter"/>
+                    <f:selectItems value="#{projetoBean.listarProjetos()}"  var="p" itemLabel="#{p.nome}">   
+                        
+                    </f:selectItems>
+                </p:selectOneMenu>
+                
+                <h:outputText/><h:commandButton action="#{projetoBean.defineProjeto}" value="Ok"/>
+            </h:panelGrid>
+            <h:link outcome="index" value="Início"/>
+        </h:form>
+    </ui:define>
+    </ui:composition>
+</html>
+
+

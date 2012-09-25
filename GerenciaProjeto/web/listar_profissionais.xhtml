@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/template/common/commonLayout.xhtml">
+        <ui:define name="conteudo">
+        <h1>Listagem de Profissionais</h1>
+        <hr/>
+        <h:form id="profissional" prependId="false">
+            <h:dataTable value="#{listarProfissionais.profissionais}" var="profissional" rules="rows" cellpadding="5">
+                <f:facet
+                    name="header">Listagem de profissionais
+                </f:facet>
+                <h:column>
+                    <f:facet
+                        name="header">Nome
+                    </f:facet>
+                    #{cliente.nome}
+                </h:column>
+                <h:column>
+                    <f:facet
+                        name="header">Data de nascimento
+                    </f:facet>                    
+                    <h:outputText value="#{profissional.dataNascimento}">
+                        <f:convertDateTime type="date" dateStyle="long"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet
+                        name="header">Data de Admissão
+                    </f:facet>                    
+                    <h:outputText value="#{profissional.dataAdmissao}">
+                        <f:convertDateTime type="date" dateStyle="long"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet
+                        name="header">CPF
+                    </f:facet>
+                    #{profissional.cpf}
+                </h:column>
+              
+                <h:column>
+                    <h:commandLink action="#{profissionalBean.editar(profissional)}">
+                        <h:graphicImage value="#{resource['imagens:file_edit.png']}"/>
+                    </h:commandLink>
+                </h:column>
+                <f:facet
+                    name="footer">Total de registros: #{listarProfissionais.profissionais.size()}
+                </f:facet>
+            </h:dataTable>
+            <hr/>
+            <h:link outcome="index" value="Início"/>
+        </h:form>
+    </ui:define>
+    </ui:composition>
+</html>

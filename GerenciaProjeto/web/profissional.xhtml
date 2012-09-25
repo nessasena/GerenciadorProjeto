@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/template/common/commonLayout.xhtml">
+        <ui:define name="conteudo">
+        <h1>Cadastro de Profissional</h1>
+        <hr/>
+        <p:messages/>
+        <h:form id="profissional" prependId="false">
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Nome:"/>
+                <p:inputText id="nome" value="#{profissionalBean.nome}" required="true" requiredMessage="Informe o nome"/>
+                <h:outputLabel value="CPF:"/>
+                <p:inputText id="cpf" value="#{profissionalBean.cpf}" required="true" requiredMessage="Informe o cpf"/>
+                <h:outputLabel value="Data de Nascimento:"/>
+                <p:inputText id="datanascimento" value="#{profissionalBean.dataNascimento}" required="true" requiredMessage="Informe a data de nascimento">
+                    <f:convertDateTime type="date"/>  
+                </p:inputText>
+                <h:outputLabel value="Data de Admissão´:"/>
+                <p:inputText id="dataadmissao" value="#{profissionalBean.dataAdmissao}" required="true" requiredMessage="Informe a data de admissão">
+                    <f:convertDateTime type="date"/>  
+                </p:inputText>
+                <h:outputLabel value="Função:"/>
+                <p:selectOneMenu id="funcao" value="#{profissionalBean.funcao}" >
+                    <f:selectItems value="#{utilMB.funcao}"/>                     
+                </p:selectOneMenu>
+                <h:outputLabel value="Grau de Instrução:"/>
+                <p:selectOneMenu id="grauInstrucao" value="#{profissionalBean.grauInstrucao}" >                    
+                    <f:selectItems value="#{utilMB.grauInstrucao}" /> 
+                </p:selectOneMenu>
+                <h:outputLabel value="E-mail:"/>
+                <p:inputText id="email" value="#{profissionalBean.email}"> 
+                </p:inputText>
+                <h:outputLabel value="Senha:"/>
+                <p:password id="senha" value="#{profissionalBean.senha}" label="Senha"/>
+                <h:outputText/><h:commandButton action="#{profissionalBean.salvar}" value="Salvar"/>
+            </h:panelGrid>
+            <h:link outcome="iniciar" value="Início"/>
+        </h:form>
+    </ui:define>
+    </ui:composition>
+</html>

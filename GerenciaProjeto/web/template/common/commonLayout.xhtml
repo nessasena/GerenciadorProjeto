@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"      
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <style type="text/css">
+            .ui-widget,
+            .ui-widget .ui-widget {
+                font-size: 12px !important;
+
+            }
+
+        </style>
+        <title>Sistema Gerenciador de Projetos</title>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+            <ui:insert name="cabecalho">
+
+                <p:layoutUnit position="north" size="135">
+                    <h:form >
+                    <h1 style="float:left"> Sistema Gerenciador de Projetos </h1>
+                    <h:graphicImage id="logomarca" alt="Imagem não encontrada."   
+                                    value="#{resource['imagens:Anexo3_logo-pos_ruy.JPG']}" title="Logomarca" 
+                                    style="float: right"/>
+                    </h:form>
+
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" >
+
+                    <h:form id="formMenu" >
+                        <p:menu >
+                            <p:submenu label="Profissional">  
+                                <p:menuitem value="Cadastrar" outcome="profissional" />
+                            </p:submenu>
+                            <p:submenu label="Projeto" rendered="#{usuarioBean.profissional}">  
+                                <p:menuitem rendered="#{usuarioBean.gerente}" outcome="projeto" value="Cadastrar" />
+
+                                <p:menuitem rendered="#{usuarioBean.profissional}" outcome="defineProjeto" value="Definir Equipe"  />
+
+                                <p:menuitem rendered="#{usuarioBean.gerente}" outcome="encerraProjeto" value="Encerrar"/>
+                            </p:submenu>
+                            <p:submenu label="Tarefa" rendered="#{usuarioBean.profissional}">  
+                                <p:menuitem rendered="#{usuarioBean.gerente}" outcome="selecionaProjeto" value="Definir Tarefa Projeto" />
+                                <p:menuitem rendered="#{usuarioBean.profissional}" outcome="concluiTarefa" value="Marcar Conclusão" />
+                            </p:submenu>
+
+                        </p:menu>
+                        <p:menu >
+                                <p:menuitem rendered="#{!usuarioBean.profissional}" value="Login" outcome="login" />
+                                <p:menuitem rendered="#{usuarioBean.profissional}" value="Logout" 
+                                            actionListener="#{usuarioBean.logout}" update="formMenu"/>
+                        </p:menu>
+                    </h:form>
+                </p:layoutUnit>
+
+            </ui:insert>
+
+            <p:layoutUnit position="center">
+                <ui:insert name="conteudo">
+                    <h:form >
+                    <h:outputText value="Sistema Gerenciador de Projetos" />
+                    </h:form>
+                </ui:insert>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south">
+                <ui:insert name="rodape">
+                    <h:form >
+                    <h:outputText
+                        value="&copy; Copyright 2012 Caroline Ramos, Igor Schkrab, Lucas Vasconcellos e Vanessa Sena." />
+                    </h:form>
+                </ui:insert>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+
+</html>
